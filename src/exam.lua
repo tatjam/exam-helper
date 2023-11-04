@@ -99,7 +99,8 @@ function Exam:run(input)
 			end
 			for i=1,#input do
 				local var = string.byte(input, i) - 96
-				if var <= 0 or var >= #self.cur_question.answers then
+				print(var)
+				if var <= 0 or var > #self.cur_question.answers then
 					valid = false
 				else
 					local ans = self.cur_question.answers[var]

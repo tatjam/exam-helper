@@ -1,8 +1,8 @@
 local class = require "pl.class"
 local sip = require "pl.sip"
 
-local true_strings = {"True", "true", "T", "V", "VERDADERO", "Verdadero", "verdadero"}
-local false_strings = {"False", "false", "F", "FALSO", "Falso", "falso"}
+local true_strings = {"True", "true", "TRUE", "T", "V", "VERDADERO", "Verdadero", "verdadero"}
+local false_strings = {"False", "false", "FALSE", "F", "FALSO", "Falso", "falso"}
 
 function is_true(sstr)
 	for _, str in ipairs(true_strings) do 
@@ -114,6 +114,10 @@ function Questions:_init(file, save)
 			while value do
 				local tb = {}
 				if save_matcher(value, tb) then
+					if self.categories[tb.cat] == nil then
+						print("Wrong save file used, aborting")
+						goto abort
+					end
 					self.categories[tb.cat][tb.idx].solved = true
 					count = count + 1
 				end
@@ -123,6 +127,7 @@ function Questions:_init(file, save)
 
 			print("You have already solved: " .. tostring(count) .. " questions out of " .. 
 					total .. " (" .. tostring(count / total * 100.0) .. "%)")
+			::abort::
 			savef:close()
 		else 
 			print("You have solved no questions out of " .. total)

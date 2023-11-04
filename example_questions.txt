@@ -1,0 +1,8 @@
+# category
+This is a true or false question
+    TRUE
+This is a multiple choice question
+    a <TRUE> First choice
+    b <FALSE> Second choice
+    c <TRUE> Third choice
+    
