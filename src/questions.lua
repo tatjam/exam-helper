@@ -1,4 +1,5 @@
 local class = require "pl.class"
+local pretty = require "pl.pretty"
 local sip = require "pl.sip"
 
 local true_strings = {"True", "true", "TRUE", "T", "V", "VERDADERO", "Verdadero", "verdadero"}
@@ -89,6 +90,7 @@ function Questions:_init(file, save)
 				total = total + #self.categories[category]
 				category = tb.cat
 				self.categories[category] = {}
+				i = 1
 			else
 				question = {}
 				question.text = value
@@ -111,6 +113,9 @@ function Questions:_init(file, save)
 			-- Load the savefile for answered questions
 			value = savef:read("l")
 			local count = 0
+			for k, v in pairs(self.categories) do
+				print(k .. " has " .. #v .. " questions")
+			end
 			while value do
 				local tb = {}
 				if save_matcher(value, tb) then
